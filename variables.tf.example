@@ -1,0 +1,60 @@
+############################################################
+# ESTE ARQUIVO É UM EXEMPLO COM TODAS AS VARIAVEIS USADAS  #
+# NOS ARQUIVOS DO TERRAFORM. EDITAR OS CAMPOS NECESSARIOS  #
+############################################################
+#                      VARIAVEIS AWS                       #
+############################################################
+
+variable "aws_region" { #REGIÃO DA AWS QUE SERÁ USADA
+  default = "us-east-1"
+}
+variable "vpc_name" { #NOME DA VPC
+  default = "Wordpress"
+}
+variable "vpc_cidr" { #CIRD MASTER DA VPC
+  default = "10.0.0.0/16"
+}
+variable "vpc_private_subnets" { #SUBNETS PRIVADAS DA VPC
+  default = ["10.0.1.0/24"]
+}
+variable "vpc_public_subnets" { #SUBNETS PUBLICAS DA vpc
+  default = ["10.0.100.0/24", "10.0.101.0/24"]
+}
+variable "vpc_azs" { #ZONAS DE DISPONIBILIDADE
+  default = ["us-east-1a"]
+}
+variable "ec2_ami" { #AMI DA INSTANCIA
+  default = "ami-04505e74c0741db8d" # = UBUNTU_20.04
+}
+variable "ec2_instance_type" { #TIPO DA INSTANCIA
+  default = "t2.micro" 
+}
+variable "aws_keyname" { #NOME DO PAR DE CHAVES CRIADO ANTERIORMENTE
+  default = "CHANGE_ME" 
+  sensitive = true
+}
+variable "aws_keypath" { #CAMINHO ONDE SE ENCONTRA A CHAVE BAIXADA DA AWS
+  default = "c:\\CHANGE\\ME"
+  sensive = true
+}
+variable "ebs_id" { #ID DO ELASTIC BLOCK STORAGE QUE FOI CRIADO PREVIAMENTE
+  default = "CHANGE_ME" 
+}
+variable "wp_eip" { #ID DO ELASTIC IP QUE FOI CRIADO PREVIAMENTE
+  default = "CHANGE_ME" 
+}
+############################################################
+#              VARIAVEIS WORDPRESS E DB                    #
+############################################################
+variable "wp_mysql_db_name" {
+  default = "wordpress" #NOME DO BANCO DE DADOS QUE SERÁ USADO
+  sensitive = true
+}
+variable "wp_mysql_db_user" {
+  default = "CHANGE_ME" #NOME DO USUARIO QUE SERÁ USADO
+  sensitive = true
+}
+variable "wp_mysql_db_pass" {
+  default = "CHANGE_ME" #SENHA USADA NO BANCO DE DADOS
+  sensitive = true
+}

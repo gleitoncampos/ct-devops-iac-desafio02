@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${WP_MYSQL_DB_NAME}
+      MYSQL_USER: ${WP_MYSQL_DB_USER}
+      MYSQL_PASSWORD: ${WP_MYSQL_DB_PASS}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - /mnt/wordpress-data/wordpress-db:/var/lib/mysql
+    expose: 
+      - "3306"
+
+  wordpress:
+    image: wordpress:5.9.0-apache
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: ${WP_MYSQL_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WP_MYSQL_DB_PASS}
+      WORDPRESS_DB_NAME: ${WP_MYSQL_DB_NAME}
+    volumes:
+      - /mnt/wordpress-data/wordpress-www:/var/www/html
+    links: 
+      - db
+
+    
+volumes:
+  wordpress: {}
+  db: {}
